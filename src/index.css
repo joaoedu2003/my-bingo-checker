@@ -1,11 +1,17 @@
 @import 'tailwindcss';
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
 
 @theme {
-  --color-accent: #2563eb;
-  --color-accent-light: #3b82f6;
-  --color-marked: #dcfce7;
-  --color-marked-border: #22c55e;
-  --color-bingo: #fbbf24;
+  --color-accent: #ff0080; /* Neon pink */
+  --color-accent-light: #00ffff; /* Cyan */
+  --color-marked: #ffff00; /* Neon yellow */
+  --color-marked-border: #ff0080; /* Neon pink */
+  --color-bingo: #00ff00; /* Neon green */
+  --color-bg-primary: #000000; /* Black background */
+  --color-bg-secondary: #1a1a1a; /* Dark gray */
+  --color-text-primary: #ffffff; /* White text */
+  --color-text-secondary: #cccccc; /* Light gray */
+  --font-sticker: 'Fredoka One', cursive;
 }
 
 html,
@@ -16,6 +22,78 @@ body,
 
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family: var(--font-sticker), system-ui, -apple-system, sans-serif;
   -webkit-tap-highlight-color: transparent;
+  background: linear-gradient(135deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 100%);
+  color: var(--color-text-primary);
+}
+
+/* Sticker base styles */
+.sticker {
+  position: relative;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.2));
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.3),
+    0 0 20px rgba(255, 0, 128, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.sticker:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 6px 12px rgba(0, 0, 0, 0.4),
+    0 0 30px rgba(255, 0, 128, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.sticker.marked {
+  background: linear-gradient(145deg, rgba(255, 255, 0, 0.3), rgba(255, 0, 128, 0.2));
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.3),
+    0 0 40px rgba(255, 255, 0, 0.8),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.sticker.bingo {
+  background: linear-gradient(145deg, rgba(0, 255, 0, 0.3), rgba(0, 255, 255, 0.2));
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.3),
+    0 0 40px rgba(0, 255, 0, 0.8),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  animation: pulse-glow 1.5s infinite;
+}
+
+/* Peeling animation */
+@keyframes peel {
+  0% {
+    transform: rotateX(0deg) rotateY(0deg);
+  }
+  50% {
+    transform: rotateX(10deg) rotateY(-5deg) translateZ(10px);
+  }
+  100% {
+    transform: rotateX(0deg) rotateY(0deg);
+  }
+}
+
+.sticker.peeling {
+  animation: peel 0.6s ease-in-out;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow:
+      0 4px 8px rgba(0, 0, 0, 0.3),
+      0 0 40px rgba(0, 255, 0, 0.8),
+      inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  }
+  50% {
+    box-shadow:
+      0 4px 8px rgba(0, 0, 0, 0.3),
+      0 0 60px rgba(0, 255, 0, 1.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  }
 }
